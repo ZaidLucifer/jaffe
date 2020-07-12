@@ -1,0 +1,209 @@
+
+---------------------------------------Authenticating User(Login)---------------------------------------
+delimiter //
+create procedure authenticateUsers(IN mailId varchar(100), IN password varchar(100))
+begin
+select Login.Role, Login.Id from Login where Login.MailId=encoder(mailId) and Login.Password=encoder(password) and Status="E";
+end //
+delimiter ;
+---------------------------------------Authenticating User(Login)---------------------------------------
+
+---------------------------------------Check if User Exist---------------------------------------
+3.Check if user exist
+delimiter //
+create procedure userExist(IN mailId varchar(100), OUT exist int)
+begin
+	set exist = 0;
+	select count(*) into exist from Login where Login.MailId=encoder(mailId) and Login.Status="E";
+end //
+delimiter ;
+---------------------------------------Check if User Exist---------------------------------------
+
+---------------------------------------Register User---------------------------------------
+2.Register User
+delimiter //
+create procedure registerUser( IN name varchar(50), IN mailId varchar(100), IN password varchar(100), IN AadharNumber int, IN ContactNo int, IN Address varchar(100), OUT avail int)
+begin
+set @exist = 0;
+call userExist(mailId, @exist);
+IF (@exist < 1) THEN 
+set @id=idGenerator();
+insert into Login(MailId, Password, Role, Id, Status, RegisteredDate) values(mailId, encoder(password), 'U', @id, 'E', now());
+insert into Users values(name, AadharNumber, @id, ContactNo, Address);
+set avail = 1;
+ELSE
+set avail = 0;
+END IF;
+end //
+delimiter ;
+---------------------------------------Register User---------------------------------------
+
+---------------------------------------Register NGO---------------------------------------
+4.Register NGO
+delimiter //
+create procedure registerNGO( IN name varchar(100), IN mailId varchar(100), IN password varchar(100), IN ContactNo int, IN CertificateId varchar(50), IN pincode int)
+begin
+DECLARE addressId CHAR(12) DEFAULT NULL;
+set @id = idGenerator();
+select Address.AddressId INTO @addressId from Address where Address.Pincode=pincode;
+IF (@addressId IS NOT NULL) THEN
+insert into Login values(mailId, encoder(password), "N", @id, "E", now());
+insert into NGOs values(name, ContactNo, CertificateId, @addressid, @id);
+ELSE
+set @addressId = NULL;
+END IF;
+end //
+delimiter ;
+---------------------------------------Register NGO---------------------------------------
+
+---------------------------------------Register Police---------------------------------------
+4.Register Police
+delimiter //
+create procedure registerPolice( IN name varchar(100), IN mailId varchar(100), IN password varchar(100), IN ContactNo int, IN pincode int)
+begin
+DECLARE addressId CHAR(12) DEFAULT NULL;
+set @id = idGenerator();
+select Address.AddressId into @addressId from Address where Address.Pincode=pincode;
+IF(@addressId IS NOT NULL) THEN
+insert into Login values(mailId, encoder(password), "P", @id, "E", now());
+insert into PoliceDepartment values(name, ContactNo, @addressid, @id);
+ELSE
+set @addressId = NULL;
+END IF;
+end //
+delimiter ;
+---------------------------------------Register Police---------------------------------------
+
+---------------------------------------Complaint Registration---------------------------------------
+4.Register Complaints
+delimiter //
+create procedure registerComplaint( IN UserId char(12), IN Address TINYTEXT, IN pincode int, IN ComplaintText MEDIUMTEXT)
+begin
+DECLARE addressId CHAR(12) DEFAULT NULL;
+DECLARE NGOId CHAR(12) DEFAULT NULL;
+DECLARE PoliceId CHAR(12) DEFAULT NULL;
+DECLARE cId INT;
+select Address.AddressId into @addressId from Address where Address.Pincode = pincode; 
+IF (@addressId IS NOT NULL) THEN
+select NGOs.Id into @NGOId from NGOs where NGOs.AddressId=@addressId;
+select PoliceDepartment.Id into @PoliceId from PoliceDepartment where PoliceDepartment.AddressId=@addressId;
+insert into Details(Details.UsersId, Details.NGOId, Details.PoliceId) values(UserId, @NGOId, @PoliceId);
+SELECT LAST_INSERT_ID() INTO @cId;
+ELSE
+insert into Details(Details.UsersId) values(UserId);
+SELECT LAST_INSERT_ID() INTO @cId;
+END IF;
+insert into ComplaintsDetail(ComplaintsDetail.Id, ComplaintsDetail.Address, Pincode, ComplaintsDetail.ComplaintText, ComplaintStatus) values(@cId, Address, pincode, ComplaintText, "PD");
+end //
+delimiter ;
+---------------------------------------Complaint Registration---------------------------------------
+
+---------------------------------------Complaint Id--------------------------------------
+4.NGO Related Complaints
+delimiter //
+create procedure getComplaintId( IN UserId char(12), IN role char(2))
+begin
+IF (role = 'U') THEN
+select Details.ComplaintId from Details where Details.UsersId = UserId;
+ELSEIF (role = 'P') THEN
+select Details.ComplaintId from Details where Details.PoliceId = UserId;
+ELSEIF (role = 'N') THEN
+select Details.ComplaintId from Details where Details.NGOId = UserId;
+END IF;
+end //
+delimiter ;
+---------------------------------------Complaint----------------------------------------
+
+---------------------------------------Complaints---------------------------------------
+4.Complaints
+delimiter //
+create procedure getComplaint( IN UserId char(12), IN role char(2))
+begin
+IF (role = 'U') THEN
+select c.ComplaintId, u.Name,  p.PoliceDepartmentName, n.NGOName, c.ComplaintText, c.RegistrationDate, c.CompaintStatus from ComplaintsDetail c, Users u, NGOs n, PoliceDepartment p, Details d where d.NGOId=UserId and (d.UsersId=u.Id || d.NGOid=n.Id || d.PoliceId=p.Id || d.ComplaintId=c.Id); 
+ELSEIF (role = 'P') THEN
+select c.ComplaintId, u.Name,  p.PoliceDepartmentName, n.NGOName, c.ComplaintText, c.RegistrationDate, c.CompaintStatus from ComplaintsDetail c, Users u, NGOs n, PoliceDepartment p, Details d where d.PoliceId=UserId and (d.UsersId=u.Id || d.NGOid=n.Id || d.PoliceId=p.Id || d.ComplaintId=c.Id); 
+ELSEIF (role = 'N') THEN
+select c.ComplaintId, u.Name,  p.PoliceDepartmentName, n.NGOName, c.ComplaintText, c.RegistrationDate, c.CompaintStatus from ComplaintsDetail c, Users u, NGOs n, PoliceDepartment p, Details d where d.UsersId=UserId and (d.UsersId=u.Id || d.NGOid=n.Id || d.PoliceId=p.Id || d.ComplaintId=c.Id); 
+END IF;
+end //
+delimiter ;
+---------------------------------------Complaints---------------------------------------
+delimiter //
+create procedure updateStatus( IN complaintId int)
+BEGIN
+DECLARE status CHAR(2);
+SELECT ComplaintsDetail.ComplaintStatus into @status from ComplaintsDetail WHERE ComplaintsDetail.Id = complaintId;
+IF (@status = 'PD') THEN
+UPDATE ComplaintsDetail SET ComplaintsDetail.Status = 'D' WHERE ComplaintsDetail.Id = complaintId;
+ELSE
+UPDATE ComplaintsDetail SET ComplaintsDetail.Status = 'PD' WHERE ComplaintsDetail.Id = complaintId;
+END IF;
+SELECT * FROM ComplaintsDetail WHERE ComplaintsDetail.Id = complaintId;
+END //
+delimiter ;
+
+----------------------------------Generic Procedure(Do not Touch)----------------------------------
+2.Register User(Generic Procedure)
+delimiter //
+create procedure register(input JSON)
+begin
+create table blueprint(col varchar(100), value varchar(100));
+set @key = "";
+set @name = "";
+set @values='[]';
+set @len = 0;
+set @i = 2;
+set @j = 0;
+select input from DUAL;
+set @keys = JSON_KEYS(input);
+select JSON_LENGTH(input) into @len;
+select @keys from DUAL;
+WHILE @len > 0 DO
+SELECT SPLIT_STRING(@keys, "\"", @i) into @key;
+SELECT JSON_EXTRACT(input, concat("$.",@key)) into @name;
+insert into blueprint(col, value) values(@key, @name);
+SET @len = @len - 1;
+SET @i = @i + 2;
+END WHILE;
+select * from blueprint;
+insert into Login values()
+drop table blueprint;
+end //
+delimiter ;
+
+3. Splitting function
+DELIMITER //
+CREATE FUNCTION 
+   SPLIT_STRING ( s VARCHAR(1024) , del CHAR(1) , i INT)
+   RETURNS VARCHAR(1024)
+   DETERMINISTIC -- always returns same results for same input parameters
+    BEGIN
+
+        DECLARE n INT ;
+
+        -- get max number of items
+        SET n = LENGTH(s) - LENGTH(REPLACE(s, del, '')) + 1;
+
+        IF i > n THEN
+            RETURN NULL ;
+        ELSE
+            RETURN SUBSTRING_INDEX(SUBSTRING_INDEX(s, del, i) , del , -1 ) ;        
+        END IF;
+
+    END //
+DELIMITER ;
+
+insert into Login(MailId, Password, Role) select MailId, Password, Role from Login where Role="A";
+
+----------------------------------Generic Procedure(Do not Touch)---------------------------------
+
+----------------------------------Practice---------------------------------
+delimiter //
+create procedure one( IN UserId char(12), OUT exist int)
+begin
+	set exist = 0;
+	select count(*) into exist from temp11 where name="nothing";
+end //
+delimiter ;
+----------------------------------Practice---------------------------------

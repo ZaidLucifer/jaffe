@@ -1,0 +1,7 @@
+insert into Login values(SHA2(MD5(SHA2('zszaidshaikh@gmail.com',256)),256), SHA2(MD5(SHA2('1234',256)),256), 'A');
+
+select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='Login';
+
+UPDATE Login
+SET Status = 1
+WHERE TRUE;

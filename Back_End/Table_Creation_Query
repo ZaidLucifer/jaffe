@@ -1,0 +1,348 @@
+-- MySQL Workbench Synchronization
+-- Generated: 2018-01-19 12:33
+-- Model: New Model
+-- Version: 1.0
+-- Project: Name of the project
+-- Author: sunbeam
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+ALTER SCHEMA `HumanTrafficking`  DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_general_ci ;
+
+CREATE TABLE IF NOT EXISTS `HumanTrafficking`.`Login` (
+  `MailId` VARCHAR(100) NOT NULL,
+  `Password` VARCHAR(100) NOT NULL,
+  `Role` CHAR(2) NOT NULL,
+  `Id` CHAR(12) NOT NULL,
+  `Status` CHAR(2) NOT NULL,
+  `RegisteredDate` DATETIME NOT NULL DEFAULT NOW(),
+  PRIMARY KEY (`Id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `HumanTrafficking`.`Users` (
+  `Name` VARCHAR(50) NOT NULL,
+  `AadharCardNumber` INT(12) NOT NULL,
+  `Id` CHAR(12) NOT NULL,
+  `ContactNo` INT(11) NULL DEFAULT NULL,
+  `Address` VARCHAR(100) NULL DEFAULT NULL,
+  `DOB` DATE NULL DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC),
+  CONSTRAINT `fk_Users_Login1`
+    FOREIGN KEY (`Id`)
+    REFERENCES `HumanTrafficking`.`Login` (`Id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `HumanTrafficking`.`NGOs` (
+  `NGOName` VARCHAR(100) NOT NULL,
+  `ContactNo` INT(11) NOT NULL,
+  `RegistrationCertificateId` VARCHAR(50) NOT NULL,
+  `AddressId` CHAR(12) NOT NULL,
+  `Id` CHAR(12) NOT NULL,
+  INDEX `fk_NGOs_Address1_idx` (`AddressId` ASC),
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC),
+  CONSTRAINT `fk_NGOs_Address1`
+    FOREIGN KEY (`AddressId`)
+    REFERENCES `HumanTrafficking`.`Address` (`AddressId`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_NGOs_Login1`
+    FOREIGN KEY (`Id`)
+    REFERENCES `HumanTrafficking`.`Login` (`Id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `HumanTrafficking`.`PoliceDepartment` (
+  `PoliceDepartmentName` VARCHAR(100) NOT NULL,
+  `ContactNo` INT(11) NOT NULL,
+  `AddressId` CHAR(12) NOT NULL,
+  `Id` CHAR(12) NOT NULL,
+  PRIMARY KEY (`Id`),
+  INDEX `fk_PoliceDepartment_Address1_idx` (`AddressId` ASC),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC),
+  CONSTRAINT `fk_PoliceDepartment_Address1`
+    FOREIGN KEY (`AddressId`)
+    REFERENCES `HumanTrafficking`.`Address` (`AddressId`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_PoliceDepartment_Login1`
+    FOREIGN KEY (`Id`)
+    REFERENCES `HumanTrafficking`.`Login` (`Id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `HumanTrafficking`.`Address` (
+  `Country` VARCHAR(50) NOT NULL,
+  `State` VARCHAR(50) NOT NULL,
+  `City` VARCHAR(50) NOT NULL,
+  `Landmark` VARCHAR(50) NOT NULL,
+  `Pincode` INT(6) NOT NULL,
+  `AddressId` CHAR(12) NOT NULL,
+  PRIMARY KEY (`AddressId`),
+  UNIQUE INDEX `AddressId_UNIQUE` (`AddressId` ASC),
+  UNIQUE INDEX `Pincode_UNIQUE` (`Pincode` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `HumanTrafficking`.`ComplaintsDetail` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `Address` TINYTEXT NOT NULL,
+  `Pincode` INT(6) NOT NULL,
+  `ComplaintText` MEDIUMTEXT NOT NULL,
+  `ComplaintRegistrationDate` DATETIME NOT NULL DEFAULT NOW(),
+  `ComplaintStatus` TINYINT(4) NULL DEFAULT NULL,
+  `ComplaintSolvedDate` DATE NULL DEFAULT NULL,
+  `PeopleHelped` MEDIUMTEXT NULL DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC),
+  CONSTRAINT `fk_ComplaintsDetail_Details1`
+    FOREIGN KEY (`Id`)
+    REFERENCES `HumanTrafficking`.`Details` (`ComplaintId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `HumanTrafficking`.`LoginCopy` (
+  `MailId` VARCHAR(50) NOT NULL,
+  `Password` VARCHAR(50) NOT NULL,
+  `Role` CHAR(2) NOT NULL,
+  `Id` CHAR(12) NOT NULL,
+  `Status` CHAR(2) NOT NULL,
+  `RegisteredDate` DATETIME NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `HumanTrafficking`.`UsersCopy` (
+  `Name` VARCHAR(50) NOT NULL,
+  `AadharCardNumber` INT(12) NOT NULL,
+  `Id` CHAR(12) NOT NULL,
+  `ContactNo` INT(11) NULL DEFAULT NULL,
+  `Address` VARCHAR(100) NULL DEFAULT NULL,
+  `DOB` DATE NULL DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC),
+  CONSTRAINT `fk_UsersCopy_LoginCopy1`
+    FOREIGN KEY (`Id`)
+    REFERENCES `HumanTrafficking`.`LoginCopy` (`Id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `HumanTrafficking`.`NGOsCopy` (
+  `NGOName` VARCHAR(100) NOT NULL,
+  `ContactNo` INT(11) NOT NULL,
+  `RegistrationCertificateId` VARCHAR(50) NOT NULL,
+  `AddressId` CHAR(12) NOT NULL,
+  `Id` CHAR(12) NOT NULL,
+  PRIMARY KEY (`Id`),
+  INDEX `fk_NGOs_Address1_idx` (`AddressId` ASC),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC),
+  CONSTRAINT `fk_NGOs_Address10`
+    FOREIGN KEY (`AddressId`)
+    REFERENCES `HumanTrafficking`.`AddressCopy` (`AddressID`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_NGOsCopy_LoginCopy1`
+    FOREIGN KEY (`Id`)
+    REFERENCES `HumanTrafficking`.`LoginCopy` (`Id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `HumanTrafficking`.`PoliceDepartmentCopy` (
+  `PoliceDepartmentName` VARCHAR(100) NOT NULL,
+  `ContactNo` INT(11) NOT NULL,
+  `AddressId` CHAR(12) NOT NULL,
+  `Id` CHAR(12) NOT NULL,
+  PRIMARY KEY (`Id`),
+  INDEX `fk_PoliceDepartment_Address1_idx` (`AddressId` ASC),
+  UNIQUE INDEX `AddressId_UNIQUE` (`AddressId` ASC),
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC),
+  CONSTRAINT `fk_PoliceDepartment_Address10`
+    FOREIGN KEY (`AddressId`)
+    REFERENCES `HumanTrafficking`.`AddressCopy` (`AddressID`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_PoliceDepartmentCopy_LoginCopy1`
+    FOREIGN KEY (`Id`)
+    REFERENCES `HumanTrafficking`.`LoginCopy` (`Id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `HumanTrafficking`.`AddressCopy` (
+  `Country` VARCHAR(50) NOT NULL,
+  `State` VARCHAR(50) NOT NULL,
+  `City` VARCHAR(50) NOT NULL,
+  `Landmark` VARCHAR(50) NOT NULL,
+  `Pincode` INT(6) NOT NULL,
+  `AddressID` CHAR(12) NOT NULL,
+  UNIQUE INDEX `AddressID_UNIQUE` (`AddressID` ASC),
+  UNIQUE INDEX `Pincode_UNIQUE` (`Pincode` ASC),
+  PRIMARY KEY (`AddressID`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `HumanTrafficking`.`ComplaintsDetailCopy` (
+  `Id` INT(11) NOT NULL AUTO_INCREMENT,
+  `Address` TINYTEXT NOT NULL,
+  `Pincode` INT(6) NOT NULL,
+  `ComplaintText` MEDIUMTEXT NOT NULL,
+  `ComplaintRegistrationDate` DATETIME NOT NULL DEFAULT NOW(),
+  `ComplaintStatus` TINYINT(4) NULL DEFAULT NULL,
+  `ComplaintSolvedDate` DATE NULL DEFAULT NULL,
+  `PeopleHelped` MEDIUMTEXT NULL DEFAULT NULL,
+  UNIQUE INDEX `Id_UNIQUE` (`Id` ASC),
+  PRIMARY KEY (`Id`),
+  CONSTRAINT `fk_ComplaintsDetailCopy_DetailsCopy1`
+    FOREIGN KEY (`Id`)
+    REFERENCES `HumanTrafficking`.`DetailsCopy` (`ComplaintId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `HumanTrafficking`.`Details` (
+  `ComplaintId` INT(11) NOT NULL AUTO_INCREMENT,
+  `UsersId` CHAR(12) NOT NULL,
+  `NGOId` CHAR(12) NULL DEFAULT NULL,
+  `PoliceId` CHAR(12) NULL DEFAULT NULL,
+  PRIMARY KEY (`ComplaintId`),
+  UNIQUE INDEX `ComplaintId_UNIQUE` (`ComplaintId` ASC),
+  INDEX `fk_Details_Users1_idx` (`UsersId` ASC),
+  INDEX `fk_Details_NGOs1_idx` (`NGOId` ASC),
+  INDEX `fk_Details_PoliceDepartment1_idx` (`PoliceId` ASC),
+  CONSTRAINT `fk_Details_Users1`
+    FOREIGN KEY (`UsersId`)
+    REFERENCES `HumanTrafficking`.`Users` (`Id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Details_NGOs1`
+    FOREIGN KEY (`NGOId`)
+    REFERENCES `HumanTrafficking`.`NGOs` (`Id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Details_PoliceDepartment1`
+    FOREIGN KEY (`PoliceId`)
+    REFERENCES `HumanTrafficking`.`PoliceDepartment` (`Id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `HumanTrafficking`.`DetailsCopy` (
+  `ComplaintId` INT(11) NOT NULL AUTO_INCREMENT,
+  `UsersId` CHAR(12) NOT NULL,
+  `NGOId` CHAR(12) NULL DEFAULT NULL,
+  `PoliceId` CHAR(12) NULL DEFAULT NULL,
+  PRIMARY KEY (`ComplaintId`),
+  UNIQUE INDEX `ComplaintId_UNIQUE` (`ComplaintId` ASC),
+  INDEX `fk_DetailsCopy_NGOsCopy2_idx` (`NGOId` ASC),
+  INDEX `fk_DetailsCopy_UsersCopy1_idx` (`UsersId` ASC),
+  INDEX `fk_DetailsCopy_PoliceDepartmentCopy1_idx` (`PoliceId` ASC),
+  CONSTRAINT `fk_DetailsCopy_NGOsCopy2`
+    FOREIGN KEY (`NGOId`)
+    REFERENCES `HumanTrafficking`.`NGOsCopy` (`Id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_DetailsCopy_UsersCopy1`
+    FOREIGN KEY (`UsersId`)
+    REFERENCES `HumanTrafficking`.`UsersCopy` (`Id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_DetailsCopy_PoliceDepartmentCopy1`
+    FOREIGN KEY (`PoliceId`)
+    REFERENCES `HumanTrafficking`.`PoliceDepartmentCopy` (`Id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+DELIMITER $$
+
+USE `HumanTrafficking`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `HumanTrafficking`.`Login_AFTER_INSERT` AFTER INSERT ON `Login` FOR EACH ROW
+BEGIN
+	insert into LoginCopy values(new.MailId, new.Password, new.Role, new.Id, new.Status);
+END$$
+
+USE `HumanTrafficking`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `HumanTrafficking`.`Login_AFTER_UPDATE` AFTER UPDATE ON `Login` FOR EACH ROW
+BEGIN
+	UPDATE LoginCopy SET Status = NEW.Status WHERE Id=NEW.Id;
+END$$
+
+USE `HumanTrafficking`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `HumanTrafficking`.`Users_AFTER_INSERT` AFTER INSERT ON `Users` FOR EACH ROW
+BEGIN
+	insert into UsersCopy values(NEW.Name, new.AadharCardNumber, new.ContactNo, new.Address, new.DOB, new.Id);
+END$$
+
+USE `HumanTrafficking`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `HumanTrafficking`.`NGOs_AFTER_INSERT` AFTER INSERT ON `NGOs` FOR EACH ROW
+BEGIN
+	insert into NGOsCopy values(new.NGOName, new.ContactNo, new.RegistrationCertificateId, new.AddressId, new.Id);
+END$$
+
+USE `HumanTrafficking`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `HumanTrafficking`.`PoliceDepartment_AFTER_INSERT` AFTER INSERT ON `PoliceDepartment` FOR EACH ROW
+BEGIN
+	insert into PoliceDepartmentCopy values(new.PoliceDepartmentName, new.ContactNo, new.AddressId, new.Id);
+END$$
+
+USE `HumanTrafficking`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `HumanTrafficking`.`Address_AFTER_INSERT` AFTER INSERT ON `Address` FOR EACH ROW
+BEGIN
+	insert into AddressCopy values(new.Country, new.State, new.City, new.Landmark, new.Pincode, new.AddressId);
+END$$
+
+USE `HumanTrafficking`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `HumanTrafficking`.`ComplaintsDetail_AFTER_INSERT` AFTER INSERT ON `ComplaintsDetail` FOR EACH ROW
+BEGIN
+	insert into ComplaintsDetailCopy( Address, Pincode, ComplaintText, ComplaintRegistrationDate, ComplaintStatus, ComplaintSolvedDate, PeopleHelped) values(new.Address, new.Pincode, new.ComplaintText, new.ComplaintRegistrationDate, new.ComplaintStatus, new.ComplaintSolvedDate, new.PeopleHelped);
+END$$
+
+USE `HumanTrafficking`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `HumanTrafficking`.`ComplaintsDetail_AFTER_UPDATE` AFTER UPDATE ON `ComplaintsDetail` FOR EACH ROW
+BEGIN
+	UPDATE ComplaintsDetailCopy SET ComplaintStatus=NEW.ComplaintStatus, ComplaintSolvedDate=new.ComplaintSolvedDate, PeopleHelped=new.PeopleHelped WHERE Id=NEW.Id;
+END$$
+
+USE `HumanTrafficking`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `HumanTrafficking`.`Details_AFTER_INSERT` AFTER INSERT ON `Details` FOR EACH ROW
+BEGIN
+	insert into DetailsCopy(UsersId, NGOId, PoliceId) values(new.UsersId, new.NGOId, new.PoliceId);
+END$$
+
+USE `HumanTrafficking`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `HumanTrafficking`.`Details_AFTER_UPDATE` AFTER UPDATE ON `Details` FOR EACH ROW
+BEGIN
+	update DetailsCopy set NGOId=new.NGOId, PoliceId=new.PoliceId where ComplaintId=new.ComplaintId;
+END$$
+
+
+DELIMITER ;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+

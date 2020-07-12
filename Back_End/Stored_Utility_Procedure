@@ -1,0 +1,18 @@
+1.
+  delimiter // 
+  create function idGenerator()
+    returns char(20) deterministic
+    begin
+      return conv(floor(rand() * 99999999999999), 20, 36);
+  end //
+  delimiter ;
+
+2
+delimiter // 
+  create function encoder(data varchar(100))
+    returns char(100) deterministic
+    begin
+      return SHA2(MD5(data), 256);
+  end //
+  delimiter ;
+

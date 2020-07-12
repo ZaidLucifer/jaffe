@@ -1,0 +1,1 @@
+select JSON_KEYS('{"Name":"Zaid", "Passowrd":"1234"}') "KEYS", JSON_EXTRACT('{"Name":"ZAID","PASSWORD":"1234"}',"$.Name");

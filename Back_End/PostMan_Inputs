@@ -1,0 +1,40 @@
+Inputs given by PostMan
+
+---------------------------Login---------------------------
+1.Login
+{
+	"mailId":"zszaidshaikh@gmail.com",
+	"password":"15349624"
+}
+---------------------------Login---------------------------
+
+---------------------------Register User---------------------------
+{
+	"name":"asdads",
+	"mailId":"zszaidshaikh@gmail.com",
+	"password":"8007615559",
+	"contactNo":"413003",
+	"aadharNo":"456798123",
+	"address":"asdasd"
+}
+---------------------------Register User---------------------------
+
+---------------------------Register Complaint---------------------------
+{
+	"address":"asdads",
+	"pincode":413003,
+	"complaintText":"vghhhjhbjhjgfgdf",
+	"status":0
+}
+---------------------------Register Complaint---------------------------
+
+---------------------------Register NGO---------------------------
+{
+	"name":"asdads",
+	"mailId":"zszaidshaikh@gmail.com",
+	"password":"8007615559",
+	"contactNo":"456231",
+	"certificateNo":"456798123",
+	"pincode":"413003"
+}
+---------------------------Register NGO---------------------------

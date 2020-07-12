@@ -1,0 +1,53 @@
+1
+CREATE DEFINER = CURRENT_USER TRIGGER `HumanTrafficking`.`Login_AFTER_INSERT` AFTER INSERT ON `Login` FOR EACH ROW
+BEGIN
+	insert into LoginCopy values(new.MailId, new.Password, new.Role, new.Id, new.Status);
+END
+
+2
+CREATE DEFINER = CURRENT_USER TRIGGER `HumanTrafficking`.`Login_AFTER_UPDATE` AFTER UPDATE ON `Login` FOR EACH ROW
+BEGIN
+	UPDATE LoginCopy SET Status = NEW.Status WHERE Id=NEW.Id;
+END
+
+3
+CREATE DEFINER = CURRENT_USER TRIGGER `HumanTrafficking`.`Users_AFTER_INSERT` AFTER INSERT ON `Users` FOR EACH ROW
+BEGIN
+	insert into UsersCopy values(NEW.Name, NEW.MailId, NEW.ContactNo, new.AadharCardNumber, new.Address, new.DOB, new.Id);
+END
+
+4
+CREATE DEFINER = CURRENT_USER TRIGGER `HumanTrafficking`.`Address_AFTER_INSERT` AFTER INSERT ON `Address` FOR EACH ROW
+BEGIN
+	insert into AddressCopy values(new.COuntry, new.State, new.City, new.Landmark, new.Pincode, new.AddressId);
+END
+
+5
+CREATE DEFINER = CURRENT_USER TRIGGER `HumanTrafficking`.`Complaints_AFTER_INSERT` AFTER INSERT ON `Complaints` FOR EACH ROW
+BEGIN
+	insert into ComplaintsCopy(UsersMailId, Address, Pincode, ComplaintText, ComplaintRegistrationDate, NGOMailId, PoliceDepartmentMailId, ComplaintStatus, ComplaintSolvedDate, PeopleHelped) values(new.UsersMailId, new.Address, new.Pincode, new.ComplaintText, new.ComplaintRegistrationDate, new.NGOMailId, new.PoliceDepartmentMailId, new.ComplaintStatus, new.ComplaintSolvedDate, new.PeopleHelped);
+END
+
+6
+CREATE DEFINER = CURRENT_USER TRIGGER `HumanTrafficking`.`Complaints_AFTER_UPDATE` AFTER UPDATE ON `Complaints` FOR EACH ROW
+BEGIN
+	UPDATE ComplaintsCopy SET ComplaintStatus=NEW.ComplaintStatus, ComplaintSolvedDate=new.ComplaintSolvedDate, PeopleHelped=new.PeopleHelped WHERE Id=NEW.Id;
+END
+
+7
+CREATE DEFINER = CURRENT_USER TRIGGER `HumanTrafficking`.`NGOs_AFTER_INSERT` AFTER INSERT ON `NGOs` FOR EACH ROW
+BEGIN
+	insert into NGOsCopy values(new.MailId, new.NGOName, new.ContactNo, new.RegistrationCertificateId, new.AddressId, new.Id);
+END
+
+8
+CREATE DEFINER = CURRENT_USER TRIGGER `HumanTrafficking`.`PoliceDepartment_AFTER_INSERT` AFTER INSERT ON `PoliceDepartment` FOR EACH ROW
+BEGIN
+	insert into PoliceDepartmentCopy values(new.MailId, new.PoliceDepartmentName, new.ContactNo, new.AddressId, new.Id);
+END
+
+9
+CREATE DEFINER = CURRENT_USER TRIGGER `HumanTrafficking`.`Complaints_AFTER_INSERT` AFTER INSERT ON `Complaints` FOR EACH ROW
+BEGIN
+	INSERT INTO ComplaintsCopy(UserId, NGOId, PoliceId) values(new.UserId, new.NGOId, new.PoliceId);
+END
