@@ -1,0 +1,40 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3 login">
+        <br/>
+        <form>
+          <div class="welcomeBack white">
+              We lose the right of complaining sometimes, by denying something, but this often triples its force.
+          </div>
+          <br/>
+          <div class="form-group white">
+            <label>Complaint Text</label>
+            <textarea class="form-control" row="5" [(ngModel)]="complaintText" [ngModelOptions]="{standalone: true}"></textarea>
+            <div *ngIf="emailResult" style="color:red; font-size:0.6em; text-transform:uppercase">*Invalid Credentials</div>
+          </div>
+
+          <div class="form-group white">
+            <label>Location of Crime</label>
+            <textarea type="text" row="5" [(ngModel)]="address" class="form-control" [ngModelOptions]="{standalone: true}"></textarea>
+          </div>
+          <div class="form-group white">
+              <label>Pincode</label>
+              <input type="text" [(ngModel)]="pincode" class="form-control" [ngModelOptions]="{standalone: true}" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+              maxlength="6">
+          </div>
+          <br/>
+          <br/>
+          <br/>
+          <button type="submit" (click)="onSubmit()" class="btn">
+            Complain
+          </button>
+        </form>
+        <br/>
+        <br/>
+      </div>
+    </div>
+    <br/>
+    <br/>
+  </div>
+</div>

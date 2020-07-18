@@ -1,0 +1,43 @@
+<div class="main container-fluid">
+  <div class="row">
+    <div class="card col-sm-3" *ngFor='let content of contents; index as i'>
+      <div></div>
+      <div class="complaintID col-md-12">{{i+1}}</div>
+      <div class="UserName col-md-12">{{content.userName}}</div>
+      <div class="UserName col-md-12">{{content.ngoName}}</div>
+      <div class="UserName col-md-12">{{content.policeName}}</div>
+      <div class="row display">
+        <div class="Complaint col-md-8">
+          {{content.complaintText}}
+        </div>
+        <div class="subs col-md-4">
+            <div class="Status" *ngIf='content.status == "PD" && (role=="A" || role=="U")' style="background-color: red; color:white">
+                Pending
+            </div>
+          <div class="Status statusNP" *ngIf='content.status == "PD" && (role=="N" || role == "P")' (mouseup)="statusFlip(i)" style="background-color: red; color:white">
+              Pending
+          </div>
+          <div class="Status" *ngIf='content.status == "D" && (role=="A" || role=="U")' style="background-color: #1D9E74; color:white">
+              Done
+          </div>
+          <div class="Status statusNP" *ngIf='content.status == "D" && (role=="N" || role == "P")' (mouseup)="statusFlip(i)" style="background-color: #1D9E74; color:white">
+              Done
+          </div>
+          <div class="RegisteredDate">
+            {{content.registeredDate}}
+          </div>
+          <div class="btnSave" *ngIf='role == "N" || role == "P"' (click)="changeStatus(content.id)">
+            <div class="save">
+              Save
+            </div>
+          </div>
+            <div class="btnDepartment" *ngIf='role == "A"' (click)="searchDepartment(content.id)">
+              <div class="department">
+                Add Department
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

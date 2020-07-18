@@ -1,0 +1,124 @@
+/**------------Common Configurations--------------*/ 
+.wrapper{
+    /* background-color: rgb(237, 237, 237); */
+    background-image: url('~/assets/svg/escheresque_ste.png');
+}
+
+.login,
+.signUp{
+    text-align: center;
+    margin-top: 10vw;
+    box-shadow: 0px 0px 5px #888888;
+}
+
+/**------------Common Configurations--------------*/ 
+
+/**------------Welcome Back Configurations--------------*/
+
+.welcomeBack{
+    text-transform: none;
+    font-size: 1.5em;
+    font-weight: bolder;
+    background-color: white;
+    text-transform: uppercase;
+    color:rgb(253, 36, 36);
+}
+
+label{
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin:0;
+}
+
+input,
+textarea,
+textarea:enabled,
+input:enabled{
+    display:block;
+    text-align: center;
+    border-radius: 0;
+    border:0;
+    outline: 0;
+    width: 50%;
+    border-bottom: 1.5px solid rgba(0, 0, 0, 0.6);
+    box-shadow: none;
+    /* border-radius: 20px 20px 20px 20px; */
+    margin: auto;
+}
+
+.login button{
+    margin: auto;
+    background-color: rgb(255, 60, 60);
+    color: white;
+    text-transform: uppercase;
+    border-radius: 20px 20px 20px 20px;
+    transition: 600ms;
+} 
+
+.login{
+    background-color: white;
+}
+
+.login button:hover{
+    cursor: pointer;
+    background-color: rgb(245, 41, 41);
+}
+
+.forgotPassword{
+    color:rgba(0, 0, 0, 0.616);
+    font-size: 0.8em;
+}
+
+.forgotPassword:hover{
+    cursor: pointer;
+}
+
+/**------------Welcome Back Configurations--------------*/
+
+/**------------SignUp Configurations--------------*/
+
+.signUp{
+    color: white;
+    padding:0 5%;
+    text-align: center;
+    text-transform: uppercase;
+    background:linear-gradient(0deg,rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('~/assets/images/loginSignUp1.jpg');
+    background-size: cover;
+    z-index: 1;
+}
+
+.signUp:hover{
+    background-color: rgba(0, 0, 0, 0.418);
+}
+
+.newHere{
+    text-shadow:0px 0px 10px rgba(0, 0, 0, 1);
+    margin-top: 3vw;
+    text-transform: none;
+    font-size: 1.5em;
+}
+
+.signUpNow{
+    text-shadow:0px 0px 10px rgba(0, 0, 0, 1);
+    text-transform: none;
+    margin-top: 2vw;
+}
+
+.btnSignUpNow{
+    width: 6em;
+    margin: auto;
+    text-shadow:0px 0px 10px rgba(0, 0, 0, 1);
+    border: 1px solid white;
+    border-radius: 20px 20px 20px 20px;
+    margin-top:10vw;
+    transition: 600ms;
+}
+
+.btnSignUpNow:hover{
+    cursor: pointer;
+    color: rgb(245, 41, 41);
+    border:1px solid rgb(226, 17, 17);
+}
+
+/**------------SignUp Configurations--------------*/
