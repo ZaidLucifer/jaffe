@@ -1,0 +1,152 @@
+/**  Css applied to the whole page  */
+
+.mainPage {
+    transition-delay: 200ms;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    font-family: sans-serif;
+    letter-spacing: 0.1vw;   
+}
+
+/**  Css applied to the whole page  */
+
+/**  Navbar CSS */
+.mainPage .wrapper {
+    z-index: 10;
+    position: fixed;
+    color: white;
+    background: linear-gradient(10deg, #222931, rgba(22, 29, 31, 0));
+    
+}
+
+.fa-rebel{
+    color: rgb(251, 76, 76);
+}
+
+.mainPage .navBarComponents {
+    display: inline-block;
+    height: 75%;
+    padding:1.5vh 0.5vw;
+    transition: 600ms;
+    font-weight: bold;
+    font-size: 0.8em;
+    text-transform: uppercase;
+}
+
+.wrapper .navBarComponents:hover {
+    cursor: pointer;
+    border-bottom: 1px solid white;
+
+}
+
+
+#logo,
+#logo:hover {
+    cursor: default;
+    border: none;
+    font-weight: bolder;
+    border-right: 1px solid rgba(255, 255, 255, 0.438);
+    background-color: none;
+}
+
+#logIn {
+    font-weight: bold;
+    border-right: 1px solid #1D9E74;
+    margin-right: 0;
+    color:rgb(0, 223, 0);
+}
+
+#logIn:hover {
+    border: none;
+    color: white;
+    background-color: #1D9E74;
+}
+
+#signUp{
+    font-weight: bold;
+    border-left: 1px solid orange;
+    margin-left: 0;
+    color:orange;
+}
+
+#signUp:hover {
+    border: none;
+    color:white;
+    background-color: rgba(255, 162, 0, 0.651);
+}
+
+#logOut{
+    font-weight: bold;
+    color: rgb(192, 11, 11);
+    text-transform: uppercase;
+}
+
+#logOut:hover{
+    border:none;
+    background-color: rgb(192, 11, 11);
+    color: white;
+}
+
+.rightPlaced {
+    float:right;
+}
+/** NavBar Settings */
+
+/** SLiding Images */
+
+/**
+.mainPage .slidingImages{
+    width: 100%;  
+}
+
+.mainPage .rightPlaced {
+    float:right;
+}
+
+.mainPage .slidingImages{
+    position: relative;
+    object-fit: scale-down;
+    overflow-x: hidden;
+    height: 47vw;
+}
+
+.mainPage .slidingImages img {
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+}
+
+.slidingImages .imageText {
+    color:white;
+    font-size: 1.5vw;
+    width: 50vw;
+    position: absolute;
+    margin: auto;
+    padding-left:2vw;
+    top: 13vw;
+    left:2vw;
+    border-left: 1px solid rgba(255, 255, 255, 0.438);
+    object-fit: cover;
+    opacity: 0.8;
+
+}
+
+.slidingImages .imageText .imageKnowMore {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 0.8vw;
+    width: 8vw;
+    padding-top:0.5vw;
+    height: 2vw;
+    color: white;
+    margin-top: 1vw;
+    background-color:rgb(251, 76, 76);
+    transition: 600ms;
+}
+
+.slidingImages .imageText .imageKnowMore:hover {
+    background-color: rgb(255, 60, 60);
+    cursor: pointer;
+    transform: scale3d();
+}
+*/

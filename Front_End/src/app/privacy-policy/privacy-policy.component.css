@@ -1,0 +1,34 @@
+/** Last Part */
+
+.lastPart div {
+    font-size: 0.8em;
+    display: inline-block;
+    
+}
+.lastPart {
+    background-color: white;
+    padding:0.5em 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-shadow: 1em;
+    border-top: 1px solid black;
+    background-color: rgb(237, 237, 237);
+}
+
+.lastPart .year {
+    padding-right: 0.5em;
+    border-right: 1.5px solid black;
+}
+
+.lastPart .privacyPolicy {
+    transition: 400ms;
+}
+
+.lastPart .privacyPolicy:hover {
+    cursor: pointer;
+    color: rgb(251, 76, 76);
+    border-bottom: 1px solid rgb(251, 76, 76);
+}
+
+/** Last Part */

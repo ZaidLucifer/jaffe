@@ -1,0 +1,139 @@
+<div class="wrapper">
+        <div class="container">
+                <div class="row">
+                        <!-- <div class="col-sm-6 offset-sm-3 signUp">
+                          <form>
+                                  <br/>
+                                  <div class="welcomeBack">Time to feel like home</div>
+                                  <br/>
+
+                                  <div class="form-group">
+                                          <label>Name</label>
+                                          <input type="text" [(ngModel)]="name" class="form-control" id="exampleInputPassword1" [ngModelOptions]="{standalone: true}">
+                                  </div>
+                                  <div class="form-group">
+                                          <label>Email</label>
+                                          <input type="email" (keyup)="checkEmailData()" [(ngModel)]="mailId" class="form-control" id="exampleInputEmail1" [ngModelOptions]="{standalone: true}">
+                                          <div *ngIf="emailResult" style="color:red; font-size:0.6em; text-transform:uppercase">*Invalid Credentials</div>
+                                  </div>
+                                  <div class="form-group">
+                                          <label>Password</label>
+                                          <input type="password" (keyup)="checkPasswordData()" [(ngModel)]="password" class="form-control" id="exampleInputPassword1" [ngModelOptions]="{standalone: true}">
+                                          <div *ngIf="passwordResult" style="color:red; font-size:0.6em; text-transform:uppercase">*Length too short</div>
+                                  </div>
+                                  <div class="form-group">
+                                          <label>Certificate Id</label>
+                                          <input type="text" [(ngModel)]="aadharNo" class="form-control" id="exampleInputPassword1" [ngModelOptions]="{standalone: true}" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="12">
+                                  </div>
+                                  <div class="form-group">
+                                          <label>Contact Number</label>
+                                          <input type="text" [(ngModel)]="contactNo" class="form-control" id="exampleInputPassword1" [ngModelOptions]="{standalone: true}" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="10">
+                                  </div>
+                                  <div class="form-group">
+                                          <label>Pincode</label>
+                                          <input type="text" [(ngModel)]="address" class="form-control" id="exampleInputPassword1" [ngModelOptions]="{standalone: true}" onkeypress='return event.charCode >= 48 && event.charCode <= 57' maxlength="6">
+                                  </div>
+                                  <br/>
+                                  <button type="submit" (click)="registerUser()" class="btn">Sign Up</button>
+
+                          </form>
+                          <br/>
+                          <br/>
+                  </div> -->
+                        <div class="col-md-8 offset-md-2">
+                                <tabset [justified]="true">
+                                        <tab heading="POLICE DEPARTMENT">
+                                                <form class="col-md-10 offset-md-1">
+                                                        <br/>
+                                                        <div class="welcomeBack">When we unite, we have the power</div>
+                                                        <br/>
+
+                                                        <div class="form-group">
+                                                                <label>Name</label>
+                                                                <input type="text" [(ngModel)]="name" class="form-control" id="exampleInputPassword1" [ngModelOptions]="{standalone: true}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                                <label>Email</label>
+                                                                <input type="email" (keyup)="checkEmailData()" [(ngModel)]="mailId" class="form-control" id="exampleInputEmail1" [ngModelOptions]="{standalone: true}">
+                                                                <div *ngIf="emailResult" style="color:red; font-size:0.6em; text-transform:uppercase">*Invalid Credentials</div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                                <label>Password</label>
+                                                                <input type="password" (keyup)="checkPasswordData()" [(ngModel)]="password" class="form-control" id="exampleInputPassword1"
+                                                                        [ngModelOptions]="{standalone: true}">
+                                                                <div *ngIf="passwordResult" style="color:red; font-size:0.6em; text-transform:uppercase">*Length too short</div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                                <label>Contact Number</label>
+                                                                <input type="text" [(ngModel)]="contactNo" class="form-control" id="exampleInputPassword1" [ngModelOptions]="{standalone: true}"
+                                                                        onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                                                        maxlength="10">
+                                                        </div>
+                                                        <div class="form-group">
+                                                                <label>Pincode</label>
+                                                                <input type="text" [(ngModel)]="pincode" class="form-control" id="exampleInputPassword1" [ngModelOptions]="{standalone: true}"
+                                                                        onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                                                        maxlength="6">
+                                                        </div>
+                                                        <br/>
+                                                        <button type="submit" (click)="registerPolice()" class="btn">Sign Up</button>
+
+                                                        <br/>
+                                                        <br/>
+                                                </form>
+                                        </tab>
+                                        <tab heading="NGO DEPARTMENT">
+                                                <form class="col-md-10 offset-md-1">
+                                                        <br/>
+                                                        <div class="welcomeBack">When we unite, we have the power</div>
+                                                        <br/>
+
+                                                        <div class="form-group">
+                                                                <label>Name</label>
+                                                                <input type="text" [(ngModel)]="name" class="form-control" id="exampleInputPassword1" [ngModelOptions]="{standalone: true}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                                <label>Email</label>
+                                                                <input type="email" (keyup)="checkEmailData()" [(ngModel)]="mailId" class="form-control" id="exampleInputEmail1" [ngModelOptions]="{standalone: true}">
+                                                                <div *ngIf="emailResult" style="color:red; font-size:0.6em; text-transform:uppercase">*Invalid Credentials</div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                                <label>Password</label>
+                                                                <input type="password" (keyup)="checkPasswordData()" [(ngModel)]="password" class="form-control" id="exampleInputPassword1"
+                                                                        [ngModelOptions]="{standalone: true}">
+                                                                <div *ngIf="passwordResult" style="color:red; font-size:0.6em; text-transform:uppercase">*Length too short</div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                                <label>Certificate Id</label>
+                                                                <input type="text" [(ngModel)]="certificateId" class="form-control" id="exampleInputPassword1" [ngModelOptions]="{standalone: true}"
+                                                                        onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                                                        maxlength="12">
+                                                        </div>
+                                                        <div class="form-group">
+                                                                <label>Contact Number</label>
+                                                                <input type="text" [(ngModel)]="contactNo" class="form-control" id="exampleInputPassword1" [ngModelOptions]="{standalone: true}"
+                                                                        onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                                                        maxlength="10">
+                                                        </div>
+                                                        <div class="form-group">
+                                                                <label>Pincode</label>
+                                                                <input type="text" [(ngModel)]="pincode" class="form-control" id="exampleInputPassword1" [ngModelOptions]="{standalone: true}"
+                                                                        onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                                                        maxlength="6">
+                                                        </div>
+                                                        <br/>
+                                                        <button type="submit" (click)="registerNGO()" class="btn">Sign Up</button>
+
+                                                        <br/>
+                                                        <br/>
+                                                </form>
+                                        </tab>
+
+                                        <br/>
+                                        <br/>
+                                </tabset>
+                        </div>
+                        <br/>
+                        <br/>
+                </div>
+        </div>

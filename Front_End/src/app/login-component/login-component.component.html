@@ -1,0 +1,49 @@
+<div class="wrapper">
+        <div class="container">
+                <div class="row">
+                        <div class="col-md-5 offset-md-2 login">
+
+                                <br/>
+                                <form>
+                                        <div class="welcomeBack">Welcome Back</div>
+                                        <br/>
+                                        <div class="form-group">
+                                                <label>Email</label>
+                                                <input type="email" (keyup)="checkEmailData()" class="form-control" [(ngModel)]="mailId" [ngModelOptions]="{standalone: true}">
+                                                <div *ngIf="emailResult" style="color:red; font-size:0.6em; text-transform:uppercase">*Invalid Credentials</div>
+                                        </div>
+
+                                        <div class="form-group">
+                                                <label>Password</label>
+                                                <input type="password" [(ngModel)]="password" (keyup)="checkPasswordData()" class="form-control" [ngModelOptions]="{standalone: true}">
+                                                <div *ngIf="passwordResult" style="color:red; font-size:0.6em; text-transform:uppercase">*Length too short</div>
+                                        </div>
+                                        <div class="forgotPassword">Forgot password ?</div>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <button type="submit" (click)="onLogin()" class="btn">Login</button>
+                                </form>
+                                <br/>
+                                <br/>
+                        </div>
+                        <div class="col-sm-3 signUp d-sm-none d-md-block d-xs-block">
+
+                                <div class="content newHere">
+                                        New here ?
+                                </div>
+
+                                <div class="content signUpNow">
+                                        Sign up and discover great amount of new opportunities to fight against Human Trafficking!
+                                </div>
+
+                                <div class="btnSignUpNow" (click)="signUp()">Sign Up</div>
+                                <br/>
+                                <br/>
+                        </div>
+                </div>
+
+                <br/>
+                <br/>
+        </div>
+</div>

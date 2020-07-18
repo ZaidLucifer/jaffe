@@ -1,0 +1,30 @@
+<div class="mainPage">
+  <div class="navigationBar d-none d-sm-block">
+    <div class='col-md-12 wrapper'>
+      <div class="navBarComponents" id='logo'>
+        <i class="fa fa-rebel" aria-hidden="true"></i>
+        JAFFE</div>
+      <div class="navBarComponents" (click)="home()">
+        <i class="fa fa-home" aria-hidden="true"></i>
+      </div>
+      <div class="navBarComponents" (click)="about()">About</div>
+      <div class="navBarComponents">Gallery</div>
+      <div class="navBarComponents">Blog</div>
+      <div class="navBarComponents">Contacts</div>
+      <div class="navBarComponents" (click)="viewComplaint()" *ngIf='role != null'>Complaints</div>
+      <div class="navBarComponents" (click)="fillComplaint()" *ngIf='role == "U"'>Complain</div>
+      <div class="navBarComponents rightPlaced" (click)="registerDepartment()" id="signUp" *ngIf='role == "A"'>
+        Register
+      </div>
+      <div class="navBarComponents rightPlaced" (click)='signUp()' id="signUp" *ngIf='role == null'>
+        <i class="fa fa-user-plus" aria-hidden="true"></i>
+        Signup</div>
+      <div class="navBarComponents rightPlaced" (click)="login()" id="logIn" *ngIf='role == null' >
+        <i class="fa fa-sign-in" aria-hidden="true"></i>
+        Login</div>
+      <div class="navBarComponents rightPlaced" (click)="logout()" id="logOut" *ngIf='role != null'>
+        <i class="fa fa-sign-out" aria-hidden="true"></i>
+        LogOut</div>
+    </div>
+  </div>
+</div>

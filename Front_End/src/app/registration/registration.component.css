@@ -1,0 +1,67 @@
+/**------------Common Configurations--------------*/ 
+.wrapper{
+    padding-top: 10vh;
+    background-image: url('~/assets/svg/escheresque_ste.png');
+}
+
+tab{
+    color: white;
+    text-align: center;
+    margin-top: 10vw;
+}
+
+form{
+    background-color: whitesmoke;
+    box-shadow: 0px 0px 5px #888888;
+}
+
+/**------------Common Configurations--------------*/ 
+
+/**------------Welcome Back Configurations--------------*/
+
+.welcomeBack{
+    text-transform: uppercase;
+    font-size: 1.5em;
+    font-weight: bolder;
+    color:black;
+}
+
+label{
+
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 0.8em;
+    margin:0;
+}
+
+input,
+input:enabled{
+    display:block;
+    text-align: center;
+    background-color: whitesmoke;
+    border-radius: 0;
+    border:0;
+    outline: 0;
+    width: 50%;
+    border-bottom: 1.5px solid rgba(0, 0, 0, 0.6);
+    box-shadow: none;
+    /* border-radius: 20px 20px 20px 20px; */
+    margin: auto;
+}
+
+button{
+    margin: auto;
+    background-color: rgb(255, 60, 60);
+    color: whitesmoke;
+    text-transform: uppercase;
+    border-radius: 20px 20px 20px 20px;
+    transition: 600ms;
+}
+
+button:hover{
+    cursor: pointer;
+    background-color: rgb(245, 41, 41);
+}
+
+/**------------Welcome Back Configurations--------------*/
+

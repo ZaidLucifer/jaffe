@@ -1,0 +1,274 @@
+/*--------------Common to all--------------*/
+.main{
+  overflow-x: hidden;
+}
+/*--------------Common to all--------------*/
+
+/*--------------First Row--------------*/
+.helpImage{
+  width:inherit;
+  background-image:linear-gradient(0,rgba(0, 0, 0, 0.4),rgba(0,0,0,0.35)), url('~/assets/images/Faith.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+  text-shadow:1px 1px 4px rgba(0, 0, 0, 1);
+  text-align: center;
+  padding: 35vh 25vw;
+}
+
+.helpImage .text{
+  padding: 0.8vw 0.6vw;
+  margin-left:6vw;
+  margin-right:6vw;
+  border: 2px solid rgba(255, 255, 255, 0.616);
+}
+
+.helpImage .text p{
+  text-transform: uppercase;
+}
+
+.helpImage #para1{
+  font-size: 2.77vw;
+  margin-bottom: 1vw;
+  font-weight: bolder;
+}
+
+.helpImage #para2{
+  font-size: 1.6vw;
+  margin-bottom: 0;
+  font-weight: bold;
+}
+
+.helpImage .knowMore{
+  font-weight: bold;
+  font-size: 1.3vw;
+  margin-top: 2vh;
+  margin-left: 18vw;
+  margin-right: 18vw;
+  text-transform: uppercase;
+  text-shadow: none;
+  background-color: rgb(255, 60, 60);
+  color:white;
+  padding: 3px 2px;
+  padding-top: 4.2px;
+  transition: 600ms;
+}
+
+.helpImage .knowMore:hover{
+  cursor: pointer;
+  background-color: rgb(245, 41, 41);
+}
+/*--------------First Row--------------*/
+
+/*--------------Welcome Shortly--------------*/
+.welcome,
+.shortly{
+  color: white;
+}
+
+.welcomeText,
+.shortlyText{
+  text-align: left;
+  padding: 10vh 0;
+  background-color: #222931;
+  padding-left:5vw;
+}
+
+.welcomeText > .wrapper,
+.shortlyText > .wrapper{
+  border-left: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.welcomeImage,
+.shortlyImage{
+  padding: 0 0;
+  height: 100%;
+}
+
+.welcomeImage > img,
+.shortlyImage > img{
+  margin: 0 0;
+  position: relative;
+  width:inherit;
+  height: inherit;
+  object-fit: cover;
+}
+
+.welcomeText > .wrapper > .title,
+.shortlyText > .wrapper > .title{
+  text-transform: uppercase;
+  font-weight: bolder;
+  font-size: 2em;
+}
+
+.welcomeText > .wrapper > .info,
+.shortlyText > .wrapper > .info{
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
+
+.welcomeText > .wrapper > .readMore,
+.shortlyText > .wrapper > .readMore{
+  padding: 0px 70px;
+  padding-left:none;
+}
+
+.welcomeText > .wrapper > .readMore > .wrapper,
+.shortlyText > .wrapper > .readMore > .wrapper{
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 80px none;
+  margin-left: -70px;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  transition:600ms;
+}
+
+.welcomeText > .wrapper > .readMore > .wrapper:hover,
+.shortlyText > .wrapper > .readMore > .wrapper:hover{
+  cursor: pointer;
+  border-color: rgb(245, 41, 41);
+  color: rgb(245, 41, 41);
+}
+/*--------------Welcome Shortly--------------*/
+
+/*--------------Team Info--------------*/
+
+.ourTeam{
+  margin-top: 10px;
+  padding-left: 50px;
+}
+
+.ourTeam > .wrapper{
+  font-size: 2.5em;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-left: 5px solid rgba(0, 0, 0, 0.7);
+}
+.team{
+  padding: 5vh 13vw;
+}
+
+.card{
+  text-align: center;
+  border: none;
+}
+
+.card .card-img-top{
+  height: 40vh;
+}
+
+.card .card-title{
+  font-weight: bolder;
+}
+
+.card .card-body{
+  border: 1px solid red;
+  margin-top: 5vh;
+  text-transform: uppercase;
+}
+
+.card .card-text{
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.card2{
+  top: 5vw;
+  margin: 0 2vw;
+}
+/*--------------Team Info--------------*/
+
+/*--------------Strategy--------------*/
+.strategy{
+  background: linear-gradient(10deg, #222931, red);
+  margin:none;
+  margin-top:10vh;
+  border: 2px solid darkblue;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-left: 40px;
+}
+
+.strategy .row{
+  text-shadow:1px 1px 2px rgba(0, 0, 0, 0.75);
+  color: white;
+  border-left: 1px solid white;
+}
+
+.strategy .row .title{
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+.strategy .rowBtn{
+  margin-top: 2vh;
+  border: none;
+  text-shadow: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+}
+
+.strategy .rowBtn .wrapper{
+  padding: 4px 6px;
+  background-color: rgb(255, 60, 60);
+  transition: 600ms;
+}
+
+.strategy .rowBtn .wrapper:hover{
+  cursor: pointer;
+  background-color: rgb(245, 41, 41);
+}
+/*--------------Strategy--------------*/
+
+/*--------------Contact Us---------------*/
+.ourContacts{
+  padding: 5vh 13vw;
+}
+
+.ourContacts .card{
+  text-align: left;
+}
+
+.ourContacts .card .card-title{
+  font-weight: bolder;
+  font-size: 2em;
+}
+
+.ourContacts .card .card-body{
+  border:none;
+  margin-top: 5vh;
+  font-size: 1em;
+  text-transform: uppercase;
+}
+
+.ourContacts .card .card-body .wrapper{
+  padding-left: 1vw;
+  border-left: 1px solid rgba(0, 0, 0, 0.7);
+}
+
+.ourContacts .card .card-text{
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.ourContacts .card .signUp{
+  padding: 5px 8px;
+  color: white;
+  background-color: rgb(255, 60, 60);
+  transition: 600ms;
+}
+
+.ourContacts .card .joinUs .signUp:hover{
+  cursor: pointer;
+  background-color: rgb(245, 41, 41);
+}
+
+.ourContacts .followUs .social{
+  padding: 5px 8px;
+}
+/*--------------Contact Us---------------*/
